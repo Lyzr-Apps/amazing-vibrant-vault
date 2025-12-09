@@ -9,9 +9,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 
-// Ensure fonts are loaded
-import '@/app/globals.css'
-
 interface FileData {
   name: string
   size: number

@@ -637,7 +637,7 @@ export default function HomePage() {
               <p className="text-slate-400 mb-4">Want to see DataLens in action?</p>
               <Button
                 onClick={loadSampleData}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                className="bg-green-600 hover:bg-green-700 text-white"
               >
                 Load Sample Data
               </Button>
@@ -668,7 +668,7 @@ export default function HomePage() {
                       {fileData.headers.map(header => (
                         <div
                           key={header}
-                          className="px-3 py-1 bg-blue-900/50 border border-blue-700 rounded-full text-sm text-blue-300"
+                          className="px-3 py-1 bg-green-900/50 border border-green-700 rounded-full text-sm text-green-300"
                         >
                           {header}
                         </div>
@@ -710,7 +710,7 @@ export default function HomePage() {
                 <Button
                   onClick={analyzeData}
                   disabled={loading}
-                  className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
+                  className="bg-green-600 hover:bg-green-700 text-white gap-2"
                 >
                   {loading ? (
                     <>
@@ -736,7 +736,7 @@ export default function HomePage() {
               {loading && (
                 <div className="mt-8 space-y-4">
                   <div className="text-center mb-6">
-                    <div className="w-12 h-12 border-4 border-slate-700 border-t-blue-500 rounded-full animate-spin mx-auto mb-4" />
+                    <div className="w-12 h-12 border-4 border-slate-700 border-t-green-500 rounded-full animate-spin mx-auto mb-4" />
                     <p className="text-white">Analyzing your data...</p>
                     <p className="text-slate-400 text-sm">This may take a few moments</p>
                   </div>

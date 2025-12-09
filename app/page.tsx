@@ -9,6 +9,9 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 
+// Ensure fonts are loaded
+import '@/app/globals.css'
+
 interface FileData {
   name: string
   size: number
@@ -238,18 +241,18 @@ export default function HomePage() {
   if (analysis) {
     return (
       <div className="min-h-screen bg-slate-900 text-foreground">
-        <header className="border-b border-slate-700 bg-slate-800/50">
-          <div className="container mx-auto px-4 py-6">
+        <header className="border-b border-slate-700/50 bg-slate-800/30 backdrop-blur-sm">
+          <div className="container mx-auto px-6 py-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <BarChart3 className="w-8 h-8 text-blue-400" />
-                <h1 className="text-2xl font-bold text-white">DataLens</h1>
+                <BarChart3 className="w-9 h-9 text-blue-400" />
+                <h1 className="text-3xl font-bold text-white tracking-tight">DataLens</h1>
               </div>
               <div className="flex gap-3">
                 <Button
                   variant="outline"
                   onClick={downloadReport}
-                  className="gap-2 border-slate-600 hover:bg-slate-700"
+                  className="gap-2 border-slate-600 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   Download Report
@@ -257,7 +260,7 @@ export default function HomePage() {
                 <Button
                   variant="outline"
                   onClick={resetAnalysis}
-                  className="gap-2 border-slate-600 hover:bg-slate-700"
+                  className="gap-2 border-slate-600 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors"
                 >
                   <RefreshCw className="w-4 h-4" />
                   New Analysis
@@ -267,30 +270,30 @@ export default function HomePage() {
           </div>
         </header>
 
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
-            <Card className="bg-slate-800 border-slate-700">
+        <div className="container mx-auto px-6 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 mb-10">
+            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
               <CardContent className="pt-6">
-                <div className="text-sm text-slate-400">Total Rows</div>
-                <div className="text-3xl font-bold text-white">{analysis.summary.totalRows}</div>
+                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Total Rows</div>
+                <div className="text-4xl font-bold text-white">{analysis.summary.totalRows}</div>
               </CardContent>
             </Card>
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
               <CardContent className="pt-6">
-                <div className="text-sm text-slate-400">Total Columns</div>
-                <div className="text-3xl font-bold text-white">{analysis.summary.totalColumns}</div>
+                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Total Columns</div>
+                <div className="text-4xl font-bold text-white">{analysis.summary.totalColumns}</div>
               </CardContent>
             </Card>
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
               <CardContent className="pt-6">
-                <div className="text-sm text-slate-400">Memory Size</div>
-                <div className="text-3xl font-bold text-white">{analysis.summary.memorySize}</div>
+                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Memory Size</div>
+                <div className="text-4xl font-bold text-white">{analysis.summary.memorySize}</div>
               </CardContent>
             </Card>
-            <Card className="bg-slate-800 border-slate-700">
+            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
               <CardContent className="pt-6">
-                <div className="text-sm text-slate-400">Completeness</div>
-                <div className="text-3xl font-bold text-white">
+                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Completeness</div>
+                <div className="text-4xl font-bold text-white">
                   {(analysis.summary.completenessScore * 100).toFixed(0)}%
                 </div>
               </CardContent>
@@ -298,50 +301,50 @@ export default function HomePage() {
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid grid-cols-6 w-full bg-slate-800 border-slate-700">
-              <TabsTrigger value="summary" className="text-xs sm:text-sm">Summary</TabsTrigger>
-              <TabsTrigger value="quality" className="text-xs sm:text-sm">Quality</TabsTrigger>
-              <TabsTrigger value="statistics" className="text-xs sm:text-sm">Statistics</TabsTrigger>
-              <TabsTrigger value="correlations" className="text-xs sm:text-sm">Correlations</TabsTrigger>
-              <TabsTrigger value="patterns" className="text-xs sm:text-sm">Patterns</TabsTrigger>
-              <TabsTrigger value="insights" className="text-xs sm:text-sm">Insights</TabsTrigger>
+            <TabsList className="grid grid-cols-6 w-full bg-slate-800/50 border-b border-slate-700/50">
+              <TabsTrigger value="summary" className="text-xs sm:text-sm font-medium">Summary</TabsTrigger>
+              <TabsTrigger value="quality" className="text-xs sm:text-sm font-medium">Quality</TabsTrigger>
+              <TabsTrigger value="statistics" className="text-xs sm:text-sm font-medium">Statistics</TabsTrigger>
+              <TabsTrigger value="correlations" className="text-xs sm:text-sm font-medium">Correlations</TabsTrigger>
+              <TabsTrigger value="patterns" className="text-xs sm:text-sm font-medium">Patterns</TabsTrigger>
+              <TabsTrigger value="insights" className="text-xs sm:text-sm font-medium">Insights</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="summary" className="mt-6 space-y-4">
-              <Card className="bg-slate-800 border-slate-700">
+            <TabsContent value="summary" className="mt-8 space-y-6">
+              <Card className="bg-slate-800/40 border-slate-700/50">
                 <CardHeader>
-                  <CardTitle className="text-white">File Summary</CardTitle>
+                  <CardTitle className="text-white text-lg font-semibold">File Summary</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Filename:</span>
-                    <span className="text-white font-mono">{fileData.name}</span>
+                <CardContent className="space-y-4 text-sm">
+                  <div className="flex justify-between items-center pb-3 border-b border-slate-700/30">
+                    <span className="text-slate-400 font-medium">Filename</span>
+                    <span className="text-white font-mono text-sm bg-slate-900/50 px-3 py-1 rounded">{fileData.name}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Dimensions:</span>
+                  <div className="flex justify-between items-center pb-3 border-b border-slate-700/30">
+                    <span className="text-slate-400 font-medium">Dimensions</span>
                     <span className="text-white">{analysis.summary.totalRows} rows × {analysis.summary.totalColumns} columns</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">File Size:</span>
+                  <div className="flex justify-between items-center pb-3 border-b border-slate-700/30">
+                    <span className="text-slate-400 font-medium">File Size</span>
                     <span className="text-white">{analysis.summary.memorySize}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">Completeness Score:</span>
-                    <span className="text-white">{(analysis.summary.completenessScore * 100).toFixed(1)}%</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400 font-medium">Completeness Score</span>
+                    <span className="text-white font-semibold">{(analysis.summary.completenessScore * 100).toFixed(1)}%</span>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-slate-800 border-slate-700">
+              <Card className="bg-slate-800/40 border-slate-700/50">
                 <CardHeader>
-                  <CardTitle className="text-white">Column Information</CardTitle>
+                  <CardTitle className="text-white text-lg font-semibold">Column Information</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {fileData.headers.map(header => (
                       <div
                         key={header}
-                        className="px-3 py-1 bg-blue-900/50 border border-blue-700 rounded-full text-sm text-blue-300"
+                        className="px-3 py-2 bg-blue-900/40 border border-blue-700/50 rounded-full text-xs font-medium text-blue-300"
                       >
                         {header}
                       </div>
@@ -351,15 +354,15 @@ export default function HomePage() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="quality" className="mt-6 space-y-4">
-              <Card className="bg-slate-800 border-slate-700">
+            <TabsContent value="quality" className="mt-8 space-y-6">
+              <Card className="bg-slate-800/40 border-slate-700/50">
                 <CardHeader>
-                  <CardTitle className="text-white">Data Quality Assessment</CardTitle>
+                  <CardTitle className="text-white text-lg font-semibold">Data Quality Assessment</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-8">
                   {Object.keys(analysis.dataQuality.missingValues || {}).length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-white mb-3">Missing Values by Column</h4>
+                      <h4 className="font-semibold text-white mb-4 text-sm">Missing Values by Column</h4>
                       <div className="space-y-2">
                         {Object.entries(analysis.dataQuality.missingValues || {}).map(([col, count]) => (
                           <div key={col} className="flex items-center justify-between">
@@ -380,22 +383,20 @@ export default function HomePage() {
                   )}
 
                   <div>
-                    <h4 className="font-semibold text-white mb-3">Duplicate Rows</h4>
-                    <div className="flex items-center gap-3">
-                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                    <h4 className="font-semibold text-white mb-4 text-sm">Duplicate Rows</h4>
+                    <div className="flex items-center gap-4">
+                      <div className={`w-14 h-14 rounded-lg flex items-center justify-center font-bold text-lg ${
                         (analysis.dataQuality.duplicateRows || 0) === 0
-                          ? 'bg-green-900/30'
-                          : 'bg-yellow-900/30'
+                          ? 'bg-green-900/20 border border-green-700/50 text-green-400'
+                          : 'bg-yellow-900/20 border border-yellow-700/50 text-yellow-400'
                       }`}>
-                        <span className="text-lg font-bold text-white">
-                          {analysis.dataQuality.duplicateRows || 0}
-                        </span>
+                        {analysis.dataQuality.duplicateRows || 0}
                       </div>
                       <div>
-                        <p className="text-white font-medium">
+                        <p className="text-white font-semibold text-sm">
                           {(analysis.dataQuality.duplicateRows || 0) === 0 ? 'No duplicates found' : 'Duplicate rows detected'}
                         </p>
-                        <p className="text-sm text-slate-400">
+                        <p className="text-xs text-slate-400 mt-1">
                           {(analysis.dataQuality.duplicateRows || 0) === 0
                             ? 'Dataset has clean row uniqueness'
                             : `Consider reviewing or cleaning ${analysis.dataQuality.duplicateRows} duplicate entries`}
@@ -406,13 +407,13 @@ export default function HomePage() {
 
                   {(analysis.dataQuality.dataTypeIssues || []).length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
+                      <h4 className="font-semibold text-white mb-4 text-sm flex items-center gap-2">
                         <AlertTriangle className="w-4 h-4 text-yellow-500" />
                         Data Type Issues
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {(analysis.dataQuality.dataTypeIssues || []).map((issue, idx) => (
-                          <div key={idx} className="p-3 bg-yellow-900/20 border border-yellow-700/50 rounded text-sm text-yellow-300">
+                          <div key={idx} className="p-3 bg-yellow-900/10 border border-yellow-700/30 rounded text-xs text-yellow-300">
                             {issue}
                           </div>
                         ))}
@@ -423,23 +424,23 @@ export default function HomePage() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="statistics" className="mt-6 space-y-4">
-              <Card className="bg-slate-800 border-slate-700">
+            <TabsContent value="statistics" className="mt-8 space-y-6">
+              <Card className="bg-slate-800/40 border-slate-700/50">
                 <CardHeader>
-                  <CardTitle className="text-white">Column Statistics</CardTitle>
-                  <CardDescription>Detailed statistical summaries for numeric columns</CardDescription>
+                  <CardTitle className="text-white text-lg font-semibold">Column Statistics</CardTitle>
+                  <CardDescription className="text-slate-400 text-xs">Detailed statistical summaries for numeric columns</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {Object.keys(analysis.statistics || {}).length > 0 ? (
                     <div className="space-y-6">
                       {Object.entries(analysis.statistics || {}).map(([colName, stats]: [string, any]) => (
-                        <div key={colName} className="border border-slate-700 rounded-lg p-4 bg-slate-900/50">
-                          <h4 className="font-semibold text-white mb-4">{colName}</h4>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div key={colName} className="border border-slate-700/30 rounded-lg p-5 bg-slate-900/30">
+                          <h4 className="font-semibold text-white mb-5 text-sm">{colName}</h4>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                             {Object.entries(stats || {}).map(([statName, value]: [string, any]) => (
                               <div key={statName}>
-                                <p className="text-xs text-slate-400 uppercase">{statName}</p>
-                                <p className="text-lg font-semibold text-white">
+                                <p className="text-xs text-slate-400 uppercase tracking-wide font-medium mb-2">{statName}</p>
+                                <p className="text-2xl font-bold text-white">
                                   {typeof value === 'number' ? value.toFixed(2) : value}
                                 </p>
                               </div>
@@ -455,38 +456,38 @@ export default function HomePage() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="correlations" className="mt-6 space-y-4">
-              <Card className="bg-slate-800 border-slate-700">
+            <TabsContent value="correlations" className="mt-8 space-y-6">
+              <Card className="bg-slate-800/40 border-slate-700/50">
                 <CardHeader>
-                  <CardTitle className="text-white">Correlation Analysis</CardTitle>
-                  <CardDescription>Relationships between numeric columns</CardDescription>
+                  <CardTitle className="text-white text-lg font-semibold">Correlation Analysis</CardTitle>
+                  <CardDescription className="text-slate-400 text-xs">Relationships between numeric columns</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {(analysis.correlations || []).length > 0 ? (
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {(analysis.correlations || [])
                         .sort((a, b) => Math.abs(b.correlation) - Math.abs(a.correlation))
                         .slice(0, 10)
                         .map((corr, idx) => (
-                          <div key={idx} className="flex items-center justify-between p-3 bg-slate-900/50 rounded border border-slate-700">
+                          <div key={idx} className="flex items-center justify-between p-4 bg-slate-900/30 rounded border border-slate-700/30 hover:bg-slate-900/50 transition-colors">
                             <div className="flex-1">
                               <p className="text-sm text-white">
-                                <span className="font-medium">{corr.column1}</span>
-                                {' '}↔{' '}
-                                <span className="font-medium">{corr.column2}</span>
+                                <span className="font-semibold">{corr.column1}</span>
+                                <span className="text-slate-400 mx-2">↔</span>
+                                <span className="font-semibold">{corr.column2}</span>
                               </p>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <div className="w-24 bg-slate-700 rounded-full h-2">
+                            <div className="flex items-center gap-3">
+                              <div className="w-28 bg-slate-700/50 rounded-full h-2">
                                 <div
                                   className={cn(
-                                    'h-2 rounded-full',
+                                    'h-2 rounded-full transition-all',
                                     corr.correlation > 0 ? 'bg-green-500' : 'bg-red-500'
                                   )}
                                   style={{ width: `${Math.abs(corr.correlation) * 100}%` }}
                                 />
                               </div>
-                              <span className="text-white font-semibold min-w-16 text-right">
+                              <span className="text-white font-bold min-w-14 text-right text-sm">
                                 {corr.correlation.toFixed(3)}
                               </span>
                             </div>
@@ -500,18 +501,18 @@ export default function HomePage() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="patterns" className="mt-6 space-y-4">
-              <Card className="bg-slate-800 border-slate-700">
+            <TabsContent value="patterns" className="mt-8 space-y-6">
+              <Card className="bg-slate-800/40 border-slate-700/50">
                 <CardHeader>
-                  <CardTitle className="text-white">Pattern Detection</CardTitle>
+                  <CardTitle className="text-white text-lg font-semibold">Pattern Detection</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-8">
                   {(analysis.patterns?.trends || []).length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-white mb-3">Identified Trends</h4>
-                      <div className="space-y-2">
+                      <h4 className="font-semibold text-white mb-4 text-sm">Identified Trends</h4>
+                      <div className="space-y-3">
                         {analysis.patterns.trends.map((trend, idx) => (
-                          <div key={idx} className="p-3 bg-blue-900/20 border border-blue-700/50 rounded text-sm text-blue-300">
+                          <div key={idx} className="p-3 bg-blue-900/15 border border-blue-700/30 rounded text-xs text-blue-300">
                             {trend}
                           </div>
                         ))}
@@ -521,11 +522,11 @@ export default function HomePage() {
 
                   {Object.keys(analysis.patterns?.distributions || {}).length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-white mb-3">Distribution Analysis</h4>
-                      <div className="space-y-2">
+                      <h4 className="font-semibold text-white mb-4 text-sm">Distribution Analysis</h4>
+                      <div className="space-y-3">
                         {Object.entries(analysis.patterns.distributions).map(([col, dist]) => (
-                          <div key={col} className="p-3 bg-slate-900/50 border border-slate-700 rounded">
-                            <p className="text-sm text-slate-300"><span className="font-medium text-white">{col}:</span> {dist}</p>
+                          <div key={col} className="p-3 bg-slate-900/30 border border-slate-700/30 rounded">
+                            <p className="text-xs text-slate-300"><span className="font-medium text-white">{col}:</span> <span className="text-slate-400">{dist}</span></p>
                           </div>
                         ))}
                       </div>
@@ -534,13 +535,13 @@ export default function HomePage() {
 
                   {(analysis.patterns?.outliers || []).length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
+                      <h4 className="font-semibold text-white mb-4 text-sm flex items-center gap-2">
                         <AlertTriangle className="w-4 h-4 text-orange-500" />
                         Detected Outliers
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {analysis.patterns.outliers.map((outlier, idx) => (
-                          <div key={idx} className="p-3 bg-orange-900/20 border border-orange-700/50 rounded text-sm text-orange-300">
+                          <div key={idx} className="p-3 bg-orange-900/15 border border-orange-700/30 rounded text-xs text-orange-300">
                             {outlier}
                           </div>
                         ))}

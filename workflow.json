@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "updated_at": "2025-12-09T00:00:00Z",
+  "workflow": {
+    "nodes": [
+      {
+        "id": "in",
+        "type": "input",
+        "label": "User CSV Upload",
+        "nodeCategory": "input",
+        "description": "User uploads CSV file",
+        "position": { "x": 100, "y": 200 }
+      },
+      {
+        "id": "analyzer",
+        "type": "agent",
+        "label": "Data Analyzer Agent",
+        "nodeCategory": "agent",
+        "description": "Analyzes CSV and generates insights",
+        "position": { "x": 500, "y": 200 }
+      },
+      {
+        "id": "out",
+        "type": "end",
+        "label": "Analysis Results",
+        "nodeCategory": "end",
+        "description": "Display comprehensive analysis",
+        "position": { "x": 900, "y": 200 }
+      }
+    ],
+    "edges": [
+      { "source": "in", "target": "analyzer" },
+      { "source": "analyzer", "target": "out" }
+    ]
+  },
+  "agents": [
+    {
+      "agent_id": "6937ee8ba7a2106e96809a92",
+      "node_id": "analyzer",
+      "name": "Data Analyzer Agent",
+      "description": "Analyzes uploaded CSV files to generate comprehensive statistical summaries, data quality assessments, correlation matrices, pattern detection, outlier identification, and actionable insights with plain-language interpretations",
+      "agent_role": "Data Analysis Specialist",
+      "agent_goal": "Provide comprehensive analysis of CSV data including statistics, data quality, patterns, correlations, and actionable insights",
+      "agent_instructions": "You are a data analysis expert. When provided with CSV data, perform the following analysis...",
+      "provider_id": "OpenAI",
+      "model": "gpt-4o",
+      "temperature": 0.3,
+      "top_p": 1,
+      "features": [],
+      "has_knowledge_base": false,
+      "rag_id": null,
+      "rag_name": null,
+      "position": { "x": 500, "y": 200 },
+      "created_at": "2025-12-09T00:00:00Z"
+    }
+  ],
+  "knowledge_bases": []
+}

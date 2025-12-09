@@ -12,6 +12,10 @@ import {
   Grid3x3,
   Loader2,
   X,
+  Activity,
+  Database,
+  Zap,
+  Eye,
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -250,10 +254,10 @@ export default function HomePage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <header className="sticky top-0 z-50 border-b border-slate-700/30 bg-slate-900/80 backdrop-blur-md">
-          <div className="container mx-auto px-6 py-6">
+          <div className="container mx-auto px-6 py-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-pink-500/10 border border-pink-500/20">
+                <div className="p-2.5 rounded-lg bg-pink-500/10 border border-pink-500/20">
                   <BarChart3 className="w-6 h-6 text-pink-400" />
                 </div>
                 <div>
@@ -288,29 +292,21 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Total Rows</p>
-              <div className="flex items-end gap-3">
-                <p className="text-3xl font-bold text-white">{analysis.summary.totalRows}</p>
-              </div>
+              <p className="text-3xl font-bold text-white">{analysis.summary.totalRows}</p>
             </div>
             <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Total Columns</p>
-              <div className="flex items-end gap-3">
-                <p className="text-3xl font-bold text-white">{analysis.summary.totalColumns}</p>
-              </div>
+              <p className="text-3xl font-bold text-white">{analysis.summary.totalColumns}</p>
             </div>
             <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">File Size</p>
-              <div className="flex items-end gap-3">
-                <p className="text-3xl font-bold text-pink-400">{analysis.summary.memorySize}</p>
-              </div>
+              <p className="text-3xl font-bold text-pink-400">{analysis.summary.memorySize}</p>
             </div>
             <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Completeness</p>
-              <div className="flex items-end gap-3">
-                <p className="text-3xl font-bold text-pink-400">
-                  {(analysis.summary.completenessScore * 100).toFixed(0)}%
-                </p>
-              </div>
+              <p className="text-3xl font-bold text-pink-400">
+                {(analysis.summary.completenessScore * 100).toFixed(0)}%
+              </p>
             </div>
           </div>
 
@@ -611,14 +607,14 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       <header className="border-b border-slate-700/30 bg-slate-900/60 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-8">
+        <div className="container mx-auto px-6 py-12">
           <div className="flex items-start gap-4">
             <div className="p-3 rounded-lg bg-pink-500/10 border border-pink-500/20">
               <BarChart3 className="w-7 h-7 text-pink-400" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-white">DataLens</h1>
-              <p className="text-sm text-slate-400 mt-1">Intelligent data analysis powered by AI</p>
+              <h1 className="text-4xl font-bold text-white">DataLens</h1>
+              <p className="text-base text-slate-400 mt-2">Intelligent data analysis powered by AI</p>
             </div>
           </div>
         </div>
@@ -642,19 +638,22 @@ export default function HomePage() {
           </div>
         )}
 
-        <div className="max-w-2xl mx-auto">
-          <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm overflow-hidden mb-8">
-            <div className="p-8">
-              <h2 className="text-xl font-bold text-white mb-1">Upload Your Data</h2>
-              <p className="text-sm text-slate-400 mb-6">Drop a CSV file or click to browse</p>
+        <div className="max-w-3xl mx-auto">
+          <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm overflow-hidden mb-10">
+            <div className="p-10">
+              <div className="flex items-center gap-3 mb-3">
+                <Upload className="w-5 h-5 text-pink-400" />
+                <h2 className="text-2xl font-bold text-white">Upload Your Data</h2>
+              </div>
+              <p className="text-sm text-slate-400 mb-8">Drag and drop a CSV file or click to browse</p>
               <div
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={handleDragDrop}
-                className="border-2 border-dashed border-slate-600 rounded-lg p-12 text-center hover:border-pink-500/50 hover:bg-slate-900/30 transition-all cursor-pointer"
+                className="border-2 border-dashed border-slate-600 rounded-lg p-16 text-center hover:border-pink-500/50 hover:bg-slate-900/30 transition-all cursor-pointer group"
               >
-                <Upload className="w-10 h-10 text-pink-400 mx-auto mb-4" />
-                <p className="text-white font-medium mb-1">Drag and drop your CSV</p>
-                <p className="text-sm text-slate-400 mb-5">Max size: no limit</p>
+                <Upload className="w-12 h-12 text-pink-400 mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <p className="text-white font-semibold mb-2 text-lg">Drag and drop your CSV</p>
+                <p className="text-sm text-slate-400 mb-6">or</p>
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -665,7 +664,7 @@ export default function HomePage() {
                 <Button
                   onClick={() => fileInputRef.current?.click()}
                   className="bg-pink-600 hover:bg-pink-700 text-white gap-2"
-                  size="sm"
+                  size="lg"
                 >
                   <Upload className="w-4 h-4" />
                   Browse Files
@@ -676,7 +675,7 @@ export default function HomePage() {
 
           {!fileData && (
             <div className="text-center py-12">
-              <p className="text-slate-400 mb-6">Demo mode: Load sample data to explore</p>
+              <p className="text-slate-400 mb-8">Try with sample data to see DataLens in action</p>
               <Button
                 onClick={loadSampleData}
                 size="lg"
@@ -690,29 +689,32 @@ export default function HomePage() {
           {fileData && (
             <>
               <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm overflow-hidden mb-8">
-                <div className="p-6 border-b border-slate-700/30">
-                  <h2 className="text-lg font-bold text-white">File Preview</h2>
-                  <p className="text-xs text-slate-400 mt-1">First 10 rows of your dataset</p>
+                <div className="p-8 border-b border-slate-700/30 bg-slate-900/20">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                    <Database className="w-5 h-5 text-pink-400" />
+                    File Preview
+                  </h2>
+                  <p className="text-xs text-slate-400 mt-2">First 10 rows of your dataset</p>
                 </div>
-                <div className="p-6 space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
+                <div className="p-8 space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="bg-slate-900/30 rounded-lg p-4">
                       <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">File Name</p>
-                      <p className="text-white font-medium font-mono text-sm">{fileData.name}</p>
+                      <p className="text-white font-medium font-mono text-sm break-all">{fileData.name}</p>
                     </div>
-                    <div>
+                    <div className="bg-slate-900/30 rounded-lg p-4">
                       <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Dimensions</p>
                       <p className="text-white font-medium">{fileData.rows} rows × {fileData.columns} columns</p>
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Columns</p>
+                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-4">Columns</p>
                     <div className="flex flex-wrap gap-2">
                       {fileData.headers.map(header => (
                         <span
                           key={header}
-                          className="px-3 py-1.5 bg-pink-500/10 border border-pink-500/30 rounded-full text-xs font-medium text-pink-300"
+                          className="px-3 py-2 bg-pink-500/10 border border-pink-500/30 rounded-full text-xs font-medium text-pink-300"
                         >
                           {header}
                         </span>
@@ -727,7 +729,7 @@ export default function HomePage() {
                           {fileData.headers.map(header => (
                             <th
                               key={header}
-                              className="px-3 py-2.5 text-left text-slate-300 font-semibold text-xs uppercase tracking-wider"
+                              className="px-4 py-3 text-left text-slate-300 font-semibold uppercase tracking-wider bg-slate-900/40"
                             >
                               {header}
                             </th>
@@ -738,7 +740,7 @@ export default function HomePage() {
                         {fileData.preview.map((row, idx) => (
                           <tr key={idx} className="border-b border-slate-700/20 hover:bg-slate-700/20 transition-colors">
                             {fileData.headers.map(header => (
-                              <td key={`${idx}-${header}`} className="px-3 py-2 text-slate-300">
+                              <td key={`${idx}-${header}`} className="px-4 py-3 text-slate-300">
                                 {row[header] || '-'}
                               </td>
                             ))}
@@ -754,7 +756,7 @@ export default function HomePage() {
                 <Button
                   onClick={analyzeData}
                   disabled={loading}
-                  className="bg-pink-600 hover:bg-pink-700 text-white gap-2 px-6"
+                  className="bg-pink-600 hover:bg-pink-700 text-white gap-2 px-8"
                   size="lg"
                 >
                   {loading ? (
@@ -764,7 +766,7 @@ export default function HomePage() {
                     </>
                   ) : (
                     <>
-                      <Grid3x3 className="w-4 h-4" />
+                      <Zap className="w-4 h-4" />
                       Analyze Data
                     </>
                   )}
@@ -781,11 +783,11 @@ export default function HomePage() {
               </div>
 
               {loading && (
-                <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm p-8">
+                <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm p-12">
                   <div className="flex flex-col items-center justify-center">
-                    <Loader2 className="w-8 h-8 text-green-400 animate-spin mb-4" />
-                    <p className="text-white font-medium mb-1">Analyzing your data</p>
-                    <p className="text-sm text-slate-400">Please wait, this may take a moment...</p>
+                    <Loader2 className="w-10 h-10 text-pink-400 animate-spin mb-4" />
+                    <p className="text-white font-semibold mb-2 text-lg">Analyzing your data</p>
+                    <p className="text-sm text-slate-400">Please wait while our AI processes your dataset...</p>
                   </div>
                 </div>
               )}

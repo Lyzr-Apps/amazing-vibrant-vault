@@ -253,8 +253,8 @@ export default function HomePage() {
           <div className="container mx-auto px-6 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-green-500/10 border border-green-500/20">
-                  <BarChart3 className="w-6 h-6 text-green-400" />
+                <div className="p-2 rounded-lg bg-pink-500/10 border border-pink-500/20">
+                  <BarChart3 className="w-6 h-6 text-pink-400" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-white">DataLens</h1>
@@ -265,7 +265,7 @@ export default function HomePage() {
                 <Button
                   onClick={downloadReport}
                   size="sm"
-                  className="gap-2 bg-green-600 hover:bg-green-700 text-white border-0"
+                  className="gap-2 bg-pink-600 hover:bg-pink-700 text-white border-0"
                 >
                   <Download className="w-4 h-4" />
                   Download
@@ -301,13 +301,13 @@ export default function HomePage() {
             <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">File Size</p>
               <div className="flex items-end gap-3">
-                <p className="text-3xl font-bold text-green-400">{analysis.summary.memorySize}</p>
+                <p className="text-3xl font-bold text-pink-400">{analysis.summary.memorySize}</p>
               </div>
             </div>
             <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Completeness</p>
               <div className="flex items-end gap-3">
-                <p className="text-3xl font-bold text-green-400">
+                <p className="text-3xl font-bold text-pink-400">
                   {(analysis.summary.completenessScore * 100).toFixed(0)}%
                 </p>
               </div>
@@ -316,22 +316,22 @@ export default function HomePage() {
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full bg-transparent border-b border-slate-700/30 p-0 rounded-none">
-              <TabsTrigger value="summary" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+              <TabsTrigger value="summary" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-pink-500 data-[state=active]:bg-transparent">
                 Summary
               </TabsTrigger>
-              <TabsTrigger value="quality" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+              <TabsTrigger value="quality" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-pink-500 data-[state=active]:bg-transparent">
                 Quality
               </TabsTrigger>
-              <TabsTrigger value="statistics" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+              <TabsTrigger value="statistics" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-pink-500 data-[state=active]:bg-transparent">
                 Stats
               </TabsTrigger>
-              <TabsTrigger value="correlations" className="hidden sm:inline-flex text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+              <TabsTrigger value="correlations" className="hidden sm:inline-flex text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-pink-500 data-[state=active]:bg-transparent">
                 Corr
               </TabsTrigger>
-              <TabsTrigger value="patterns" className="hidden sm:inline-flex text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+              <TabsTrigger value="patterns" className="hidden sm:inline-flex text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-pink-500 data-[state=active]:bg-transparent">
                 Patterns
               </TabsTrigger>
-              <TabsTrigger value="insights" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+              <TabsTrigger value="insights" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-pink-500 data-[state=active]:bg-transparent">
                 Insights
               </TabsTrigger>
             </TabsList>
@@ -370,7 +370,7 @@ export default function HomePage() {
                     {fileData.headers.map(header => (
                       <div
                         key={header}
-                        className="px-3 py-2 bg-green-900/40 border border-green-700/50 rounded-full text-xs font-medium text-green-300"
+                        className="px-3 py-2 bg-pink-900/40 border border-pink-700/50 rounded-full text-xs font-medium text-pink-300"
                       >
                         {header}
                       </div>
@@ -413,7 +413,7 @@ export default function HomePage() {
                     <div className="flex items-center gap-4">
                       <div className={`w-14 h-14 rounded-lg flex items-center justify-center font-bold text-lg ${
                         (analysis.dataQuality.duplicateRows || 0) === 0
-                          ? 'bg-green-900/20 border border-green-700/50 text-green-400'
+                          ? 'bg-pink-900/20 border border-pink-700/50 text-pink-400'
                           : 'bg-yellow-900/20 border border-yellow-700/50 text-yellow-400'
                       }`}>
                         {analysis.dataQuality.duplicateRows || 0}
@@ -508,7 +508,7 @@ export default function HomePage() {
                                 <div
                                   className={cn(
                                     'h-2 rounded-full transition-all',
-                                    corr.correlation > 0 ? 'bg-green-500' : 'bg-red-500'
+                                    corr.correlation > 0 ? 'bg-pink-500' : 'bg-red-500'
                                   )}
                                   style={{ width: `${Math.abs(corr.correlation) * 100}%` }}
                                 />
@@ -538,7 +538,7 @@ export default function HomePage() {
                       <h4 className="font-semibold text-white mb-4 text-sm">Identified Trends</h4>
                       <div className="space-y-3">
                         {analysis.patterns.trends.map((trend, idx) => (
-                          <div key={idx} className="p-3 bg-green-900/15 border border-green-700/30 rounded text-xs text-green-300">
+                          <div key={idx} className="p-3 bg-pink-900/15 border border-pink-700/30 rounded text-xs text-pink-300">
                             {trend}
                           </div>
                         ))}
@@ -585,13 +585,13 @@ export default function HomePage() {
                     <div className="flex gap-4">
                       <div className={cn(
                         'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0',
-                        insight.severity === 'success' && 'bg-green-900/30',
+                        insight.severity === 'success' && 'bg-pink-900/30',
                         insight.severity === 'warning' && 'bg-yellow-900/30',
-                        insight.severity === 'info' && 'bg-green-900/30'
+                        insight.severity === 'info' && 'bg-pink-900/30'
                       )}>
-                        {insight.severity === 'success' && <CheckCircle className="w-5 h-5 text-green-400" />}
+                        {insight.severity === 'success' && <CheckCircle className="w-5 h-5 text-pink-400" />}
                         {insight.severity === 'warning' && <AlertTriangle className="w-5 h-5 text-yellow-400" />}
-                        {insight.severity === 'info' && <TrendingUp className="w-5 h-5 text-green-400" />}
+                        {insight.severity === 'info' && <TrendingUp className="w-5 h-5 text-pink-400" />}
                       </div>
                       <div className="flex-1">
                         <h4 className="font-semibold text-white mb-1">{insight.title}</h4>
@@ -613,8 +613,8 @@ export default function HomePage() {
       <header className="border-b border-slate-700/30 bg-slate-900/60 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-8">
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20">
-              <BarChart3 className="w-7 h-7 text-green-400" />
+            <div className="p-3 rounded-lg bg-pink-500/10 border border-pink-500/20">
+              <BarChart3 className="w-7 h-7 text-pink-400" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-white">DataLens</h1>
@@ -650,9 +650,9 @@ export default function HomePage() {
               <div
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={handleDragDrop}
-                className="border-2 border-dashed border-slate-600 rounded-lg p-12 text-center hover:border-green-500/50 hover:bg-slate-900/30 transition-all cursor-pointer"
+                className="border-2 border-dashed border-slate-600 rounded-lg p-12 text-center hover:border-pink-500/50 hover:bg-slate-900/30 transition-all cursor-pointer"
               >
-                <Upload className="w-10 h-10 text-green-400 mx-auto mb-4" />
+                <Upload className="w-10 h-10 text-pink-400 mx-auto mb-4" />
                 <p className="text-white font-medium mb-1">Drag and drop your CSV</p>
                 <p className="text-sm text-slate-400 mb-5">Max size: no limit</p>
                 <input
@@ -664,7 +664,7 @@ export default function HomePage() {
                 />
                 <Button
                   onClick={() => fileInputRef.current?.click()}
-                  className="bg-green-600 hover:bg-green-700 text-white gap-2"
+                  className="bg-pink-600 hover:bg-pink-700 text-white gap-2"
                   size="sm"
                 >
                   <Upload className="w-4 h-4" />
@@ -680,7 +680,7 @@ export default function HomePage() {
               <Button
                 onClick={loadSampleData}
                 size="lg"
-                className="bg-green-600 hover:bg-green-700 text-white"
+                className="bg-pink-600 hover:bg-pink-700 text-white"
               >
                 Load Sample Data
               </Button>
@@ -712,7 +712,7 @@ export default function HomePage() {
                       {fileData.headers.map(header => (
                         <span
                           key={header}
-                          className="px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-full text-xs font-medium text-green-300"
+                          className="px-3 py-1.5 bg-pink-500/10 border border-pink-500/30 rounded-full text-xs font-medium text-pink-300"
                         >
                           {header}
                         </span>
@@ -754,7 +754,7 @@ export default function HomePage() {
                 <Button
                   onClick={analyzeData}
                   disabled={loading}
-                  className="bg-green-600 hover:bg-green-700 text-white gap-2 px-6"
+                  className="bg-pink-600 hover:bg-pink-700 text-white gap-2 px-6"
                   size="lg"
                 >
                   {loading ? (

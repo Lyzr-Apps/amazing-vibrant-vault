@@ -242,7 +242,7 @@ export default function HomePage() {
           <div className="container mx-auto px-6 py-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <BarChart3 className="w-9 h-9 text-blue-400" />
+                <BarChart3 className="w-9 h-9 text-green-400" />
                 <h1 className="text-3xl font-bold text-white tracking-tight">DataLens</h1>
               </div>
               <div className="flex gap-3">
@@ -341,7 +341,7 @@ export default function HomePage() {
                     {fileData.headers.map(header => (
                       <div
                         key={header}
-                        className="px-3 py-2 bg-blue-900/40 border border-blue-700/50 rounded-full text-xs font-medium text-blue-300"
+                        className="px-3 py-2 bg-green-900/40 border border-green-700/50 rounded-full text-xs font-medium text-green-300"
                       >
                         {header}
                       </div>
@@ -509,7 +509,7 @@ export default function HomePage() {
                       <h4 className="font-semibold text-white mb-4 text-sm">Identified Trends</h4>
                       <div className="space-y-3">
                         {analysis.patterns.trends.map((trend, idx) => (
-                          <div key={idx} className="p-3 bg-blue-900/15 border border-blue-700/30 rounded text-xs text-blue-300">
+                          <div key={idx} className="p-3 bg-green-900/15 border border-green-700/30 rounded text-xs text-green-300">
                             {trend}
                           </div>
                         ))}
@@ -558,11 +558,11 @@ export default function HomePage() {
                         'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0',
                         insight.severity === 'success' && 'bg-green-900/30',
                         insight.severity === 'warning' && 'bg-yellow-900/30',
-                        insight.severity === 'info' && 'bg-blue-900/30'
+                        insight.severity === 'info' && 'bg-green-900/30'
                       )}>
                         {insight.severity === 'success' && <CheckCircle className="w-5 h-5 text-green-400" />}
                         {insight.severity === 'warning' && <AlertTriangle className="w-5 h-5 text-yellow-400" />}
-                        {insight.severity === 'info' && <TrendingUp className="w-5 h-5 text-blue-400" />}
+                        {insight.severity === 'info' && <TrendingUp className="w-5 h-5 text-green-400" />}
                       </div>
                       <div className="flex-1">
                         <h4 className="font-semibold text-white mb-1">{insight.title}</h4>
@@ -584,7 +584,7 @@ export default function HomePage() {
       <header className="border-b border-slate-700 bg-slate-800/50">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center gap-3">
-            <BarChart3 className="w-8 h-8 text-blue-400" />
+            <BarChart3 className="w-8 h-8 text-green-400" />
             <h1 className="text-2xl font-bold text-white">DataLens</h1>
           </div>
           <p className="text-slate-400 mt-1">Transform raw CSV data into comprehensive insights</p>
@@ -609,9 +609,9 @@ export default function HomePage() {
               <div
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={handleDragDrop}
-                className="border-2 border-dashed border-slate-600 rounded-lg p-12 text-center hover:border-blue-500 transition cursor-pointer"
+                className="border-2 border-dashed border-slate-600 rounded-lg p-12 text-center hover:border-green-500 transition cursor-pointer"
               >
-                <Upload className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+                <Upload className="w-12 h-12 text-green-400 mx-auto mb-4" />
                 <p className="text-white font-medium mb-2">Drag and drop your CSV file here</p>
                 <p className="text-slate-400 text-sm mb-4">or</p>
                 <input
@@ -623,7 +623,7 @@ export default function HomePage() {
                 />
                 <Button
                   onClick={() => fileInputRef.current?.click()}
-                  className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
+                  className="bg-green-600 hover:bg-green-700 text-white gap-2"
                 >
                   <Upload className="w-4 h-4" />
                   Browse Files

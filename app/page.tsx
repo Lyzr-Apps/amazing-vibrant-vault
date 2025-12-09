@@ -639,8 +639,7 @@ export default function HomePage() {
               <p className="text-slate-400 mb-4">Want to see DataLens in action?</p>
               <Button
                 onClick={loadSampleData}
-                variant="outline"
-                className="border-slate-600 text-white hover:bg-slate-700"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
               >
                 Load Sample Data
               </Button>

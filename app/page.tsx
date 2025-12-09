@@ -1,7 +1,18 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { Upload, Download, RefreshCw, TrendingUp, AlertTriangle, CheckCircle, BarChart3, Grid3x3 } from 'lucide-react'
+import {
+  Upload,
+  Download,
+  RefreshCw,
+  TrendingUp,
+  AlertTriangle,
+  CheckCircle,
+  BarChart3,
+  Grid3x3,
+  Loader2,
+  X,
+} from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -237,30 +248,36 @@ export default function HomePage() {
 
   if (analysis) {
     return (
-      <div className="min-h-screen bg-slate-900 text-foreground">
-        <header className="border-b border-slate-700/50 bg-slate-800/30 backdrop-blur-sm">
-          <div className="container mx-auto px-6 py-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <header className="sticky top-0 z-50 border-b border-slate-700/30 bg-slate-900/80 backdrop-blur-md">
+          <div className="container mx-auto px-6 py-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <BarChart3 className="w-9 h-9 text-green-400" />
-                <h1 className="text-3xl font-bold text-white tracking-tight">DataLens</h1>
+                <div className="p-2 rounded-lg bg-green-500/10 border border-green-500/20">
+                  <BarChart3 className="w-6 h-6 text-green-400" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold text-white">DataLens</h1>
+                  <p className="text-xs text-slate-400">Analysis Results</p>
+                </div>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 <Button
-                  variant="outline"
                   onClick={downloadReport}
-                  className="gap-2 border-slate-600 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors"
+                  size="sm"
+                  className="gap-2 bg-green-600 hover:bg-green-700 text-white border-0"
                 >
                   <Download className="w-4 h-4" />
-                  Download Report
+                  Download
                 </Button>
                 <Button
-                  variant="outline"
                   onClick={resetAnalysis}
-                  className="gap-2 border-slate-600 text-slate-200 hover:bg-slate-700 hover:text-white transition-colors"
+                  size="sm"
+                  variant="outline"
+                  className="gap-2 border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  New Analysis
+                  New
                 </Button>
               </div>
             </div>
@@ -268,43 +285,55 @@ export default function HomePage() {
         </header>
 
         <div className="container mx-auto px-6 py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 mb-10">
-            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
-              <CardContent className="pt-6">
-                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Total Rows</div>
-                <div className="text-4xl font-bold text-white">{analysis.summary.totalRows}</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
-              <CardContent className="pt-6">
-                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Total Columns</div>
-                <div className="text-4xl font-bold text-white">{analysis.summary.totalColumns}</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
-              <CardContent className="pt-6">
-                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Memory Size</div>
-                <div className="text-4xl font-bold text-white">{analysis.summary.memorySize}</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-slate-800/60 border-slate-700/50 hover:bg-slate-800/80 transition-colors">
-              <CardContent className="pt-6">
-                <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2">Completeness</div>
-                <div className="text-4xl font-bold text-white">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Total Rows</p>
+              <div className="flex items-end gap-3">
+                <p className="text-3xl font-bold text-white">{analysis.summary.totalRows}</p>
+              </div>
+            </div>
+            <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Total Columns</p>
+              <div className="flex items-end gap-3">
+                <p className="text-3xl font-bold text-white">{analysis.summary.totalColumns}</p>
+              </div>
+            </div>
+            <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">File Size</p>
+              <div className="flex items-end gap-3">
+                <p className="text-3xl font-bold text-green-400">{analysis.summary.memorySize}</p>
+              </div>
+            </div>
+            <div className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-5 hover:border-slate-700/60 transition-colors">
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Completeness</p>
+              <div className="flex items-end gap-3">
+                <p className="text-3xl font-bold text-green-400">
                   {(analysis.summary.completenessScore * 100).toFixed(0)}%
-                </div>
-              </CardContent>
-            </Card>
+                </p>
+              </div>
+            </div>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid grid-cols-6 w-full bg-slate-800/50 border-b border-slate-700/50">
-              <TabsTrigger value="summary" className="text-xs sm:text-sm font-medium">Summary</TabsTrigger>
-              <TabsTrigger value="quality" className="text-xs sm:text-sm font-medium">Quality</TabsTrigger>
-              <TabsTrigger value="statistics" className="text-xs sm:text-sm font-medium">Statistics</TabsTrigger>
-              <TabsTrigger value="correlations" className="text-xs sm:text-sm font-medium">Correlations</TabsTrigger>
-              <TabsTrigger value="patterns" className="text-xs sm:text-sm font-medium">Patterns</TabsTrigger>
-              <TabsTrigger value="insights" className="text-xs sm:text-sm font-medium">Insights</TabsTrigger>
+            <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full bg-transparent border-b border-slate-700/30 p-0 rounded-none">
+              <TabsTrigger value="summary" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+                Summary
+              </TabsTrigger>
+              <TabsTrigger value="quality" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+                Quality
+              </TabsTrigger>
+              <TabsTrigger value="statistics" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+                Stats
+              </TabsTrigger>
+              <TabsTrigger value="correlations" className="hidden sm:inline-flex text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+                Corr
+              </TabsTrigger>
+              <TabsTrigger value="patterns" className="hidden sm:inline-flex text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+                Patterns
+              </TabsTrigger>
+              <TabsTrigger value="insights" className="text-xs sm:text-sm font-medium rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:bg-transparent">
+                Insights
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="summary" className="mt-8 space-y-6">
@@ -580,40 +609,52 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900">
-      <header className="border-b border-slate-700 bg-slate-800/50">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center gap-3">
-            <BarChart3 className="w-8 h-8 text-green-400" />
-            <h1 className="text-2xl font-bold text-white">DataLens</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <header className="border-b border-slate-700/30 bg-slate-900/60 backdrop-blur-sm">
+        <div className="container mx-auto px-6 py-8">
+          <div className="flex items-start gap-4">
+            <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20">
+              <BarChart3 className="w-7 h-7 text-green-400" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-white">DataLens</h1>
+              <p className="text-sm text-slate-400 mt-1">Intelligent data analysis powered by AI</p>
+            </div>
           </div>
-          <p className="text-slate-400 mt-1">Transform raw CSV data into comprehensive insights</p>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-6 py-12">
         {error && (
-          <Alert className="mb-6 bg-red-900/20 border-red-700 text-red-300">
-            <AlertTriangle className="w-4 h-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
+          <div className="mb-8 max-w-2xl mx-auto">
+            <div className="bg-red-900/20 border border-red-700/50 rounded-lg p-4 flex gap-3">
+              <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-red-300">{error}</p>
+              </div>
+              <button
+                onClick={() => setError(null)}
+                className="ml-auto flex-shrink-0 text-red-400 hover:text-red-300"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         )}
 
         <div className="max-w-2xl mx-auto">
-          <Card className="bg-slate-800 border-slate-700 mb-6">
-            <CardHeader>
-              <CardTitle className="text-white">Upload Your Data</CardTitle>
-              <CardDescription>Drag and drop a CSV file or click to select</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm overflow-hidden mb-8">
+            <div className="p-8">
+              <h2 className="text-xl font-bold text-white mb-1">Upload Your Data</h2>
+              <p className="text-sm text-slate-400 mb-6">Drop a CSV file or click to browse</p>
               <div
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={handleDragDrop}
-                className="border-2 border-dashed border-slate-600 rounded-lg p-12 text-center hover:border-green-500 transition cursor-pointer"
+                className="border-2 border-dashed border-slate-600 rounded-lg p-12 text-center hover:border-green-500/50 hover:bg-slate-900/30 transition-all cursor-pointer"
               >
-                <Upload className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                <p className="text-white font-medium mb-2">Drag and drop your CSV file here</p>
-                <p className="text-slate-400 text-sm mb-4">or</p>
+                <Upload className="w-10 h-10 text-green-400 mx-auto mb-4" />
+                <p className="text-white font-medium mb-1">Drag and drop your CSV</p>
+                <p className="text-sm text-slate-400 mb-5">Max size: no limit</p>
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -624,19 +665,21 @@ export default function HomePage() {
                 <Button
                   onClick={() => fileInputRef.current?.click()}
                   className="bg-green-600 hover:bg-green-700 text-white gap-2"
+                  size="sm"
                 >
                   <Upload className="w-4 h-4" />
                   Browse Files
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {!fileData && (
-            <div className="text-center mb-8">
-              <p className="text-slate-400 mb-4">Want to see DataLens in action?</p>
+            <div className="text-center py-12">
+              <p className="text-slate-400 mb-6">Demo mode: Load sample data to explore</p>
               <Button
                 onClick={loadSampleData}
+                size="lg"
                 className="bg-green-600 hover:bg-green-700 text-white"
               >
                 Load Sample Data
@@ -646,44 +689,45 @@ export default function HomePage() {
 
           {fileData && (
             <>
-              <Card className="bg-slate-800 border-slate-700 mb-6">
-                <CardHeader>
-                  <CardTitle className="text-white">File Preview</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
+              <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm overflow-hidden mb-8">
+                <div className="p-6 border-b border-slate-700/30">
+                  <h2 className="text-lg font-bold text-white">File Preview</h2>
+                  <p className="text-xs text-slate-400 mt-1">First 10 rows of your dataset</p>
+                </div>
+                <div className="p-6 space-y-6">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm text-slate-400">File Name</p>
-                      <p className="text-white font-mono text-sm">{fileData.name}</p>
+                      <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">File Name</p>
+                      <p className="text-white font-medium font-mono text-sm">{fileData.name}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-slate-400">Dimensions</p>
-                      <p className="text-white font-mono text-sm">{fileData.rows} rows × {fileData.columns} columns</p>
+                      <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Dimensions</p>
+                      <p className="text-white font-medium">{fileData.rows} rows × {fileData.columns} columns</p>
                     </div>
                   </div>
 
                   <div>
-                    <p className="text-sm text-slate-400 mb-2">Columns</p>
+                    <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-3">Columns</p>
                     <div className="flex flex-wrap gap-2">
                       {fileData.headers.map(header => (
-                        <div
+                        <span
                           key={header}
-                          className="px-3 py-1 bg-green-900/50 border border-green-700 rounded-full text-sm text-green-300"
+                          className="px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-full text-xs font-medium text-green-300"
                         >
                           {header}
-                        </div>
+                        </span>
                       ))}
                     </div>
                   </div>
 
                   <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-xs">
                       <thead>
-                        <tr className="border-b border-slate-700">
+                        <tr className="border-b border-slate-700/30">
                           {fileData.headers.map(header => (
                             <th
                               key={header}
-                              className="px-4 py-2 text-left text-slate-300 font-semibold bg-slate-900/50"
+                              className="px-3 py-2.5 text-left text-slate-300 font-semibold text-xs uppercase tracking-wider"
                             >
                               {header}
                             </th>
@@ -692,9 +736,9 @@ export default function HomePage() {
                       </thead>
                       <tbody>
                         {fileData.preview.map((row, idx) => (
-                          <tr key={idx} className="border-b border-slate-700 hover:bg-slate-900/50">
+                          <tr key={idx} className="border-b border-slate-700/20 hover:bg-slate-700/20 transition-colors">
                             {fileData.headers.map(header => (
-                              <td key={`${idx}-${header}`} className="px-4 py-2 text-slate-300">
+                              <td key={`${idx}-${header}`} className="px-3 py-2 text-slate-300">
                                 {row[header] || '-'}
                               </td>
                             ))}
@@ -703,18 +747,19 @@ export default function HomePage() {
                       </tbody>
                     </table>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              <div className="flex gap-3 justify-center">
+              <div className="flex gap-3 justify-center mb-8">
                 <Button
                   onClick={analyzeData}
                   disabled={loading}
-                  className="bg-green-600 hover:bg-green-700 text-white gap-2"
+                  className="bg-green-600 hover:bg-green-700 text-white gap-2 px-6"
+                  size="lg"
                 >
                   {loading ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <Loader2 className="w-4 h-4 animate-spin" />
                       Analyzing...
                     </>
                   ) : (
@@ -727,26 +772,21 @@ export default function HomePage() {
                 <Button
                   onClick={resetAnalysis}
                   variant="outline"
-                  className="border-slate-600 text-white hover:bg-slate-700"
+                  className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white gap-2"
+                  size="lg"
                 >
+                  <X className="w-4 h-4" />
                   Clear
                 </Button>
               </div>
 
               {loading && (
-                <div className="mt-8 space-y-4">
-                  <div className="text-center mb-6">
-                    <div className="w-12 h-12 border-4 border-slate-700 border-t-green-500 rounded-full animate-spin mx-auto mb-4" />
-                    <p className="text-white">Analyzing your data...</p>
-                    <p className="text-slate-400 text-sm">This may take a few moments</p>
+                <div className="rounded-xl border border-slate-700/30 bg-slate-800/50 backdrop-blur-sm p-8">
+                  <div className="flex flex-col items-center justify-center">
+                    <Loader2 className="w-8 h-8 text-green-400 animate-spin mb-4" />
+                    <p className="text-white font-medium mb-1">Analyzing your data</p>
+                    <p className="text-sm text-slate-400">Please wait, this may take a moment...</p>
                   </div>
-                  <Card className="bg-slate-800 border-slate-700">
-                    <CardContent className="pt-6 space-y-3">
-                      <Skeleton className="h-4 bg-slate-700" />
-                      <Skeleton className="h-4 bg-slate-700" />
-                      <Skeleton className="h-4 bg-slate-700 w-5/6" />
-                    </CardContent>
-                  </Card>
                 </div>
               )}
             </>
